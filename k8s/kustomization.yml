@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 00-namespace.yml
+  - 01-configuration.yml
+  - 02-data.yml
+  - 03-applications.yml
+  - 04-scaling.yml
+  - 05-observability.yml
