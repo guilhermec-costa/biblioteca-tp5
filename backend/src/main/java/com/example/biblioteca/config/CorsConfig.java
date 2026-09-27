@@ -14,8 +14,9 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173", "http://localhost:4173", "http://localhost:4273")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+                        .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*", "http://biblioteca.local", "https://biblioteca.local")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
             }
         };
     }
