@@ -266,6 +266,11 @@ spec:
         - name: promtail
           image: grafana/promtail:3.4.2
           args: ["-config.file=/etc/promtail/promtail.yml"]
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           securityContext:
             runAsUser: 0
           resources:
@@ -281,6 +286,9 @@ spec:
             - name: pods
               mountPath: /var/log/pods
               readOnly: true
+            - name: docker-containers
+              mountPath: /var/lib/docker/containers
+              readOnly: true
       volumes:
         - name: config
           configMap:
@@ -291,6 +299,9 @@ spec:
         - name: pods
           hostPath:
             path: /var/log/pods
+        - name: docker-containers
+          hostPath:
+            path: /var/lib/docker/containers
 ---
 apiVersion: v1
 kind: Service
